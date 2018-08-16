@@ -57,9 +57,29 @@ _THIS IS WORK IN PROGRESS_
     "timezone": 376
   }
 }
+
+./bin/wof-stats-data -mode repo /usr/local/whosonfirst-data/whosonfirst-data-venue-us-ca | jq
+{
+  "stats": {
+    "count": 1519389,
+    "is_ceased_false": 2,
+    "is_ceased_true": 89,
+    "is_ceased_unknown": 1519298,
+    "is_current_false": 12710,
+    "is_current_true": 23489,
+    "is_current_unknown": 1483190,
+    "is_deprecated_false": 1506753,
+    "is_deprecated_true": 12636,
+    "is_superseded_false": 1506711,
+    "is_superseded_true": 12678,
+    "is_superseding_false": 1507015,
+    "is_superseding_true": 12374,
+    "venue": 1519389
+  }
+}
 ```
 
-Some existential flags like `is_superseded_false` and  `is_deprecated_false` do not need to be included in this output.
+Some existential flags like `is_superseded_false` and  `is_deprecated_false` do not need to be included in this output. I've included both dumps here so I have something to work with addressing the issue.
 
 ### wof-stats-du
 
