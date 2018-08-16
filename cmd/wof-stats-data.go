@@ -91,6 +91,9 @@ func main() {
 			return err
 		}
 
+		pt := f.Placetype()
+		incr(pt)
+
 		is_current, err := whosonfirst.IsCurrent(f)
 
 		if err != nil {
@@ -98,6 +101,38 @@ func main() {
 		}
 
 		incr_existential("is_current", is_current.StringFlag())
+
+		is_deprecated, err := whosonfirst.IsDeprecated(f)
+
+		if err != nil {
+			return err
+		}
+
+		incr_existential("is_deprecated", is_deprecated.StringFlag())
+
+		is_ceased, err := whosonfirst.IsCeased(f)
+
+		if err != nil {
+			return err
+		}
+
+		incr_existential("is_ceased", is_ceased.StringFlag())
+
+		is_superseded, err := whosonfirst.IsSuperseded(f)
+
+		if err != nil {
+			return err
+		}
+
+		incr_existential("is_superseded", is_superseded.StringFlag())
+
+		is_superseding, err := whosonfirst.IsSuperseding(f)
+
+		if err != nil {
+			return err
+		}
+
+		incr_existential("is_superseding", is_superseding.StringFlag())
 
 		return nil
 	}

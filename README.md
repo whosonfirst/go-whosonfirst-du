@@ -19,9 +19,47 @@ All of this package's dependencies are bundled with the code in the `vendor` dir
 _THIS IS WORK IN PROGRESS_
 
 ```
-./bin/wof-stats-data -mode repo /usr/local/whosonfirst-data/whosonfirst-data
-{"stats":{"alt_files":312438,"count":1044399,"is_current_false":50888,"is_current_true":348742,"is_current_unknown":332331}}
+./bin/wof-stats-data -mode repo /usr/local/whosonfirst-data/whosonfirst-data | jq
+{
+  "stats": {
+    "alt_files": 312438,
+    "borough": 247,
+    "campus": 16081,
+    "continent": 8,
+    "count": 1044399,
+    "country": 229,
+    "county": 47029,
+    "dependency": 40,
+    "disputed": 91,
+    "empire": 12,
+    "is_ceased_true": 29908,
+    "is_ceased_unknown": 702053,
+    "is_current_false": 50888,
+    "is_current_true": 348742,
+    "is_current_unknown": 332331,
+    "is_deprecated_false": 711042,
+    "is_deprecated_true": 20919,
+    "is_superseded_false": 714979,
+    "is_superseded_true": 16982,
+    "is_superseding_false": 717293,
+    "is_superseding_true": 14668,
+    "localadmin": 189742,
+    "locality": 344351,
+    "macrocounty": 375,
+    "macrohood": 1193,
+    "macroregion": 112,
+    "marinearea": 305,
+    "microhood": 2023,
+    "neighbourhood": 124760,
+    "ocean": 7,
+    "planet": 1,
+    "region": 4979,
+    "timezone": 376
+  }
+}
 ```
+
+Some existential flags like `is_superseded_false` and  `is_deprecated_false` do not need to be included in this output.
 
 ### wof-stats-du
 
