@@ -29,4 +29,4 @@ fmt:
 	go fmt cmd/*.go
 
 bin: 	self
-	@GOPATH=$(GOPATH) go build -o bin/wof-du-stats cmd/wof-du-stats.go
+	@GOPATH=$(GOPATH) go build -o bin/wof-stats-du cmd/wof-stats-du.go

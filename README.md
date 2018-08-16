@@ -1,4 +1,4 @@
-# go-whosonfirst-du
+# go-whosonfirst-stats
 
 Go tools for generating usage stats for Who's On First
 
@@ -14,10 +14,10 @@ All of this package's dependencies are bundled with the code in the `vendor` dir
 
 ## Tools
 
-### wof-du-stats
+### wof-stats-du
 
 ```
-./bin/wof-du-stats -mode repo /usr/local/data/whosonfirst-data* | python -mjson.tool
+./bin/wof-stats-du -mode repo /usr/local/data/whosonfirst-data* | python -mjson.tool
 {   
     "stats": {
         "0-10k": 26336534,
