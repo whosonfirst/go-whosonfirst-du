@@ -14,6 +14,15 @@ All of this package's dependencies are bundled with the code in the `vendor` dir
 
 ## Tools
 
+### wof-stats-data
+
+_THIS IS WORK IN PROGRESS_
+
+```
+./bin/wof-stats-data -mode repo /usr/local/whosonfirst-data/whosonfirst-data
+{"stats":{"alt_files":312438,"count":1044399,"is_current_false":50888,"is_current_true":348742,"is_current_unknown":332331}}
+```
+
 ### wof-stats-du
 
 ```
