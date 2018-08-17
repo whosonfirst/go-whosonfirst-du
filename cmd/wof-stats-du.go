@@ -10,12 +10,16 @@ import (
 	"io"
 	"log"
 	"os"
+	"strings"
 	"sync"
 )
 
 func main() {
 
-	var mode = flag.String("mode", "files", "...")
+	valid_modes := strings.Join(index.Modes(), ",")
+	desc_modes := fmt.Sprintf("The mode to use importing data. Valid modes are: %s.", valid_modes)
+
+	var mode = flag.String("mode", "repo", desc_modes)
 
 	flag.Parse()
 

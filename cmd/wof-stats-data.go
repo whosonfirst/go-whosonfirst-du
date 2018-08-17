@@ -13,12 +13,16 @@ import (
 	"io"
 	"log"
 	"os"
+	"strings"
 	"sync"
 )
 
 func main() {
 
-	var mode = flag.String("mode", "files", "...")
+	valid_modes := strings.Join(index.Modes(), ",")
+	desc_modes := fmt.Sprintf("The mode to use importing data. Valid modes are: %s.", valid_modes)
+
+	var mode = flag.String("mode", "repo", desc_modes)
 
 	flag.Parse()
 
@@ -42,15 +46,26 @@ func main() {
 
 	incr_existential := func(key string, str_flag string) {
 
-		switch str_flag {
-		case "-1":
-			key = fmt.Sprintf("%s_unknown", key)
-		case "0":
-			key = fmt.Sprintf("%s_false", key)
-		default:
-			key = fmt.Sprintf("%s_true", key)
-		}
+		switch key {
 
+		case "is_current":
+
+			switch str_flag {
+			case "-1":
+				key = fmt.Sprintf("%s_unknown", key)
+			case "0":
+				key = fmt.Sprintf("%s_false", key)
+			default:
+				key = fmt.Sprintf("%s", key)
+			}
+
+		default:
+
+			if str_flag != "1" {
+				return
+			}
+		}
+		
 		incr(key)
 	}
 
@@ -81,7 +96,7 @@ func main() {
 		incr("count")
 
 		if is_alt {
-			incr("alt_files")
+			incr("is_alt")
 			return nil
 		}
 
