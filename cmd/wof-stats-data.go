@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"flag"
@@ -13,6 +14,8 @@ import (
 	"io"
 	"log"
 	"os"
+	"path/filepath"
+	"sort"
 	"strings"
 	"sync"
 )
@@ -23,11 +26,31 @@ func main() {
 	desc_modes := fmt.Sprintf("The mode to use importing data. Valid modes are: %s.", valid_modes)
 
 	var mode = flag.String("mode", "repo", desc_modes)
+	var format = flag.String("format", "json", "Write stats in this format. Valid formats are: json, markdown.")
+	var out = flag.String("out", "", "Write stats to this path. If empty write stats to STDOUT.")
 
 	flag.Parse()
 
-	mu := new(sync.Mutex)
+	wr := os.Stdout
 
+	if *out != "" {
+
+		path, err := filepath.Abs(*out)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fh, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0644)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		wr = fh
+	}
+
+	mu := new(sync.Mutex)
 	stats := make(map[string]int64)
 
 	incr := func(key string) {
@@ -65,7 +88,7 @@ func main() {
 				return
 			}
 		}
-		
+
 		incr(key)
 	}
 
@@ -168,12 +191,45 @@ func main() {
 	report := make(map[string]interface{})
 	report["stats"] = stats
 
-	body, err := json.Marshal(report)
+	// please put this is a package or something...
+	// (20180817/thisisaaronland)
 
-	if err != nil {
-		log.Fatal(err)
+	switch *format {
+
+	case "markdown":
+
+		for c, i := range report {
+
+			details := i.(map[string]int64)
+			keys := make([]string, 0)
+
+			for k, _ := range details {
+				keys = append(keys, k)
+			}
+
+			sort.Strings(keys)
+
+			wr.Write([]byte(fmt.Sprintf("## %s\n\n", c)))
+
+			for _, k := range keys {
+
+				wr.Write([]byte(fmt.Sprintf("* **%s** %d\n", k, details[k])))
+			}
+
+			wr.Write([]byte("\n"))
+		}
+
+	default:
+
+		body, err := json.Marshal(report)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		r := bytes.NewReader(body)
+		io.Copy(wr, r)
 	}
 
-	fmt.Println(string(body))
 	os.Exit(0)
 }

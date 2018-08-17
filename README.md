@@ -1,10 +1,10 @@
 # go-whosonfirst-stats
 
-Go tools for generating usage stats for Who's On First
+Go tools for generating statistics for Who's On First documents.
 
 ## Install
 
-You will need to have both `Go` (specifically a version of Go more recent than 1.7 so let's just assume you need [Go 1.9](https://golang.org/dl/) or higher) and the `make` programs installed on your computer. Assuming you do just type:
+You will need to have both `Go` (specifically a version of Go more recent than 1.7 so let's just assume you need [Go 1.10](https://golang.org/dl/) or higher) and the `make` programs installed on your computer. Assuming you do just type:
 
 ```
 make bin
@@ -19,8 +19,12 @@ All of this package's dependencies are bundled with the code in the `vendor` dir
 ```
 ./bin/wof-stats-data -h
 Usage of ./bin/wof-stats-data:
+  -format string
+    	Write stats in this format. Valid formats are: json, markdown. (default "json")
   -mode string
     	The mode to use importing data. Valid modes are: directory,feature,feature-collection,files,geojson-ls,meta,path,repo,sqlite. (default "repo")
+  -out string
+    	Write stats to this path. If empty write stats to STDOUT.
 ```
 
 For example:
