@@ -75,7 +75,7 @@ func main() {
 
 			switch str_flag {
 			case "-1":
-				key = fmt.Sprintf("%s_unknown", key)
+				return
 			case "0":
 				key = fmt.Sprintf("%s_false", key)
 			default:

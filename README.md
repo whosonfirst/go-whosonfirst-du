@@ -30,7 +30,19 @@ Usage of ./bin/wof-stats-data:
 For example:
 
 ```
-PLEASE ADD ME
+./bin/wof-stats-data /usr/local/whosonfirst-data/whosonfirst-data-venue-us-ca | jq
+{
+  "stats": {
+    "count": 1519389,
+    "is_ceased": 89,
+    "is_current": 23489,
+    "is_current_false": 12710,
+    "is_deprecated": 12636,
+    "is_superseded": 12678,
+    "is_superseding": 12374,
+    "venue": 1519389
+  }
+}
 ```
 
 ### wof-stats-du
