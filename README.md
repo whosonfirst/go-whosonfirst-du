@@ -14,11 +14,11 @@ All of this package's dependencies are bundled with the code in the `vendor` dir
 
 ## Tools
 
-### wof-stats-data
+### wof-stats-counts
 
 ```
-./bin/wof-stats-data -h
-Usage of ./bin/wof-stats-data:
+./bin/wof-stats-counts -h
+Usage of ./bin/wof-stats-counts:
   -format string
     	Write stats in this format. Valid formats are: json, markdown. (default "json")
   -mode string
@@ -32,7 +32,7 @@ Usage of ./bin/wof-stats-data:
 For example:
 
 ```
-./bin/wof-stats-data -pretty /usr/local/whosonfirst-data/whosonfirst-data-venue-us-ca
+./bin/wof-stats-counts -pretty /usr/local/whosonfirst-data/whosonfirst-data-venue-us-ca
 {
   "stats": {
     "count": 1519389,

@@ -33,4 +33,4 @@ fmt:
 
 bin: 	self
 	@GOPATH=$(GOPATH) go build -o bin/wof-stats-du cmd/wof-stats-du.go
-	@GOPATH=$(GOPATH) go build -o bin/wof-stats-data cmd/wof-stats-data.go
+	@GOPATH=$(GOPATH) go build -o bin/wof-stats-counts cmd/wof-stats-counts.go
