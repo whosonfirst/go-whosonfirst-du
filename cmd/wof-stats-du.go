@@ -1,10 +1,12 @@
 package main
 
 import (
-	"context"
+       "bytes"
+	"context"	
 	"encoding/json"
 	"flag"
 	"fmt"
+	"github.com/tidwall/pretty"	
 	"github.com/whosonfirst/go-whosonfirst-index"
 	"github.com/whosonfirst/go-whosonfirst-uri"
 	"io"
@@ -20,7 +22,8 @@ func main() {
 	desc_modes := fmt.Sprintf("The mode to use importing data. Valid modes are: %s.", valid_modes)
 
 	var mode = flag.String("mode", "repo", desc_modes)
-
+	var json_pretty = flag.Bool("pretty", false, "Generate pretty-printed JSON.")
+	
 	flag.Parse()
 
 	mu := new(sync.Mutex)
@@ -126,6 +129,14 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println(string(body))
+	if *json_pretty {
+		body = pretty.Pretty(body)
+	}
+
+	wr := os.Stdout	// in advance of custom options
+	
+	r := bytes.NewReader(body)
+	io.Copy(wr, r)
+
 	os.Exit(0)
 }

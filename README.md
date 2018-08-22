@@ -25,12 +25,14 @@ Usage of ./bin/wof-stats-data:
     	The mode to use importing data. Valid modes are: directory,feature,feature-collection,files,geojson-ls,meta,path,repo,sqlite. (default "repo")
   -out string
     	Write stats to this path. If empty write stats to STDOUT.
+  -pretty
+    	Generate pretty-printed JSON.	
 ```
 
 For example:
 
 ```
-./bin/wof-stats-data /usr/local/whosonfirst-data/whosonfirst-data-venue-us-ca | jq
+./bin/wof-stats-data -pretty /usr/local/whosonfirst-data/whosonfirst-data-venue-us-ca
 {
   "stats": {
     "count": 1519389,
@@ -52,12 +54,14 @@ For example:
 Usage of ./bin/wof-stats-du:
   -mode string
     	The mode to use importing data. Valid modes are: directory,feature,feature-collection,files,geojson-ls,meta,path,repo,sqlite. (default "repo")
+  -pretty
+    	Generate pretty-printed JSON.
 ```
 
 For example:
 
 ```
-./bin/wof-stats-du -mode repo /usr/local/data/whosonfirst-data* | python -mjson.tool
+./bin/wof-stats-du -pretty -mode repo /usr/local/data/whosonfirst-data* 
 {   
     "stats": {
         "0-10k": 26336534,

@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"github.com/tidwall/pretty"	
 	"github.com/whosonfirst/go-whosonfirst-geojson-v2/feature"
 	"github.com/whosonfirst/go-whosonfirst-geojson-v2/properties/whosonfirst"
 	"github.com/whosonfirst/go-whosonfirst-index"
@@ -28,6 +29,8 @@ func main() {
 	var mode = flag.String("mode", "repo", desc_modes)
 	var format = flag.String("format", "json", "Write stats in this format. Valid formats are: json, markdown.")
 	var out = flag.String("out", "", "Write stats to this path. If empty write stats to STDOUT.")
+
+	var json_pretty = flag.Bool("pretty", false, "Generate pretty-printed JSON.")
 
 	flag.Parse()
 
@@ -222,11 +225,15 @@ func main() {
 	default:
 
 		body, err := json.Marshal(report)
-
+		
 		if err != nil {
 			log.Fatal(err)
 		}
 
+		if *json_pretty {
+			body = pretty.Pretty(body)
+		}
+		
 		r := bytes.NewReader(body)
 		io.Copy(wr, r)
 	}
