@@ -33,7 +33,7 @@ func main() {
 	var out = flag.String("out", "", "Write stats to this path. If empty write stats to STDOUT.")
 
 	var custom flags.MultiString
-	flag.Var(&custom, "custom", "A custom key/value to increment. Paths are defined using the `gjson` dot notation.")
+	flag.Var(&custom, "custom", "A custom key/value to increment. Paths are defined using the gjson package's dot notation.")
 
 	var json_pretty = flag.Bool("pretty", false, "Generate pretty-printed JSON.")
 

@@ -19,6 +19,8 @@ All of this package's dependencies are bundled with the code in the `vendor` dir
 ```
 ./bin/wof-stats-counts -h
 Usage of ./bin/wof-stats-counts:
+  -custom value
+    	  A custom key/value to increment. Paths are defined using the gjson package's dot notation.
   -format string
     	Write stats in this format. Valid formats are: json, markdown. (default "json")
   -mode string
