@@ -6,7 +6,9 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"github.com/tidwall/gjson"	
 	"github.com/tidwall/pretty"	
+	"github.com/whosonfirst/go-whosonfirst-cli/flags"
 	"github.com/whosonfirst/go-whosonfirst-geojson-v2/feature"
 	"github.com/whosonfirst/go-whosonfirst-geojson-v2/properties/whosonfirst"
 	"github.com/whosonfirst/go-whosonfirst-index"
@@ -29,6 +31,9 @@ func main() {
 	var mode = flag.String("mode", "repo", desc_modes)
 	var format = flag.String("format", "json", "Write stats in this format. Valid formats are: json, markdown.")
 	var out = flag.String("out", "", "Write stats to this path. If empty write stats to STDOUT.")
+
+	var custom flags.MultiString
+	flag.Var(&custom, "custom", "A custom key/value to increment. Paths are defined using the `gjson` dot notation.")
 
 	var json_pretty = flag.Bool("pretty", false, "Generate pretty-printed JSON.")
 
@@ -174,6 +179,16 @@ func main() {
 		}
 
 		incr_existential("is_superseding", is_superseding.StringFlag())
+
+		for _, path := range custom {
+
+		    rsp := gjson.GetBytes(f.Bytes(), path)
+
+		    if rsp.Exists(){
+		    	key := rsp.String()
+			incr(key)
+		    }
+		}
 
 		return nil
 	}
